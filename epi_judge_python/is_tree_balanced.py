@@ -1,10 +1,29 @@
 from binary_tree_node import BinaryTreeNode
 from test_framework import generic_test
 
-
+import collections
 def is_balanced_binary_tree(tree: BinaryTreeNode) -> bool:
-    # TODO - you fill in here.
-    return True
+    StatusHeight = collections.namedtuple('StatusHeight', ('balanced', 'height'))
+    def check_balanced(tree):
+        # Base case: NULL
+        if not tree:
+            return StatusHeight(True, -1)
+
+        # Ask left subtree for height and if balanced
+        left_result = check_balanced(tree.left)
+        if not left_result.balanced:
+            return left_result
+
+        # Ask right subtree for height and if balanced
+        right_result = check_balanced(tree.right)
+        if not right_result.balanced:
+            return right_result
+        
+        # Determine if balanced, calculate height
+        is_balanced = abs(left_result.height - right_result.height) <= 1
+        height = max(left_result.height, right_result.height) + 1
+        return StatusHeight(is_balanced, height)
+    return check_balanced(tree).balanced
 
 
 if __name__ == '__main__':
