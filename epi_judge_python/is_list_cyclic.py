@@ -8,7 +8,27 @@ from test_framework.test_utils import enable_executor_hook
 
 
 def has_cycle(head: ListNode) -> Optional[ListNode]:
-    # TODO - you fill in here.
+    jogger = head
+    sprinter = head
+    length = 1
+    while sprinter and sprinter.next:
+        sprinter = sprinter.next.next
+        jogger = jogger.next
+        length += 1
+        if sprinter is jogger:
+            cycle_len = 1
+            checkpt = sprinter
+            while jogger.next is not checkpt:
+                cycle_len += 1
+                jogger = jogger.next
+
+            lagger = leader = head
+            for _ in range(cycle_len):
+                leader = leader.next
+            while lagger is not leader:
+                lagger = lagger.next 
+                leader = leader.next
+            return leader
     return None
 
 
