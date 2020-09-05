@@ -4,16 +4,31 @@ from test_framework import generic_test
 
 import heapq
 def merge_sorted_arrays(sorted_arrays: List[List[int]]) -> List[int]:
-    # O(n) space, O(nlogn) time
-    # sorted_arrays elements --O(nlogn) time--> heap, O(n) space --O(n) time--> result array, O(n) space
+    # O(n) space, O(2*nlogk) ~ O(nlogk) time
+    # sorted_arrays elements --O(nlogk) time--> heap, O(k) space --O(nlogk) time--> result array, O(n) space
     result = []
-    # Get all elements from all sorted arrays, heapify
-    all_elements = [item for array in sorted_arrays for item in array]
-    heapq.heapify(all_elements)
-    # Keep popping from heap to push to result
-    while all_elements:
-        result.append(heapq.heappop(all_elements))
+    # Put max k elements into heap
+    min_heap = []
+    array_iters = [iter(x) for x in sorted_arrays]
+
+    # init heap
+    for i, it in enumerate(array_iters):
+        first_element = next(it, None)
+        if first_element is not None:
+            heapq.heappush(min_heap, (first_element, i))
+
+    # # Pop min from heap, add next val to heap, if any
+    while min_heap:
+        curr_min_element, curr_min_arr = heapq.heappop(min_heap)
+        curr_arr_iter = array_iters[curr_min_arr]
+        next_element = next(curr_arr_iter, None)
+        if next_element is not None:
+            heapq.heappush(min_heap, (next_element, curr_min_arr))
+        result.append(curr_min_element)
     return result
+
+    # Pythonic
+    # return list(heapq.merge(*sorted_arrays))
 
 
 if __name__ == '__main__':
