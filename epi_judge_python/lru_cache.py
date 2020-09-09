@@ -2,22 +2,34 @@ from test_framework import generic_test
 from test_framework.test_failure import TestFailure
 
 
+import collections
 class LruCache:
     def __init__(self, capacity: int) -> None:
-        # TODO - you fill in here.
-        return
+        # Use OrderedDict to have FIFO capability
+        self._cache = collections.OrderedDict()
+        self._capacity = capacity
 
     def lookup(self, isbn: int) -> int:
-        # TODO - you fill in here.
-        return 0
+        # Return price, update to be most recently used. If ISBN not found, return -1
+        if isbn in self._cache:
+            price = self._cache.pop(isbn)
+            self._cache[isbn] = price
+            return price
+        else:
+            return -1
 
     def insert(self, isbn: int, price: int) -> None:
-        # TODO - you fill in here.
-        return
+        # If ISBN present, update to be most recently used, otherwise add ISBN
+        if isbn in self._cache:
+            price = self._cache.pop(isbn)
+        elif len(self._cache) == self._capacity:
+                self._cache.popitem(last=False)
+        self._cache[isbn] = price
+
 
     def erase(self, isbn: int) -> bool:
-        # TODO - you fill in here.
-        return True
+        # Remove ISBN record & return True, otherwise return False
+        return self._cache.pop(isbn, None) is not None
 
 
 def lru_cache_tester(commands):
