@@ -10,10 +10,23 @@ class GraphVertex:
         self.label = label
         self.edges: List['GraphVertex'] = []
 
-
+import collections
 def clone_graph(graph: GraphVertex) -> GraphVertex:
-    # TODO - you fill in here.
-    return GraphVertex(0)
+    if graph is None:
+        return None
+
+    # Queue for BFS
+    q = collections.deque([graph])
+    # Keep track of original/copy vertices with hashmap
+    orig_to_copy = {graph: GraphVertex(graph.label)}
+    while q:
+        cur = q.popleft()
+        for v in cur.edges:
+            if v not in orig_to_copy:
+                q.append(v)
+                orig_to_copy[v] = GraphVertex(v.label)
+            orig_to_copy[cur].edges.append(orig_to_copy[v])
+    return orig_to_copy[graph]
 
 
 def copy_labels(edges):
