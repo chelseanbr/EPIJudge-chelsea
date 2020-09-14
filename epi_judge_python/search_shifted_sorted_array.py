@@ -4,8 +4,18 @@ from test_framework import generic_test
 
 
 def search_smallest(A: List[int]) -> int:
-    # TODO - you fill in here.
-    return 0
+    shiftArr = A
+    # find pivot with binary search
+    l = 0
+    r = len(shiftArr) - 1
+    while l < r:
+        m = l + (r-l)//2
+        if shiftArr[m] > shiftArr[r]:
+            l = m + 1
+        else:
+            r = m
+    # pivot at l
+    return l
 
 
 if __name__ == '__main__':
