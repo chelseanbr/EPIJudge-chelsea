@@ -13,6 +13,12 @@ num weights ~ w
   3: [[2, 3], [2, 4]]}
 
   ***PROBLEM if for same weight, some edge(s) not connected
+
+** ALTERNATE DICT ?
+{1: {1: [2], 2: [3]},
+ 2: {1: [2]},
+ 3: {2: [3, 4]}}
+
 2. Loop through keys to get list(s) with max edge length, O(w) * O(n) time
  * Put vertices into set to heapify (max_heap) and get max two nums
  * Keep track of max product
