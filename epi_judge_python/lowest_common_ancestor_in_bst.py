@@ -20,12 +20,14 @@ def find_lca(tree: BstNode, s: BstNode, b: BstNode) -> Optional[BstNode]:
     # else:
     #     return tree
 # Iterative
-    while (s.data < tree.data and b.data < tree.data) or (s.data > tree.data and b.data > tree.data):
+    while tree:
         if s.data < tree.data and b.data < tree.data:
             tree = tree.left
         elif s.data > tree.data and b.data > tree.data:
             tree = tree.right
-    return tree
+        else:
+            return tree
+    return None
 
 @enable_executor_hook
 def lca_wrapper(executor, tree, s, b):
