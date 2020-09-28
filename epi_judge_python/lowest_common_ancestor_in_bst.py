@@ -11,15 +11,21 @@ from test_framework.test_utils import enable_executor_hook
 # Input nodes are nonempty and the key at s is less than or equal to that at b.
 def find_lca(tree: BstNode, s: BstNode, b: BstNode) -> Optional[BstNode]:
 # Recursive, O(n) time, O() space
-    # Continue exploring left or right if both nodes are in left (<) or right (>) substree
-    if s.data < tree.data and b.data < tree.data:
-        return find_lca(tree.left, s, b)
-    elif s.data > tree.data and b.data > tree.data:
-        return find_lca(tree.right, s, b)
-    # If nodes not both in left/right, they split, so return current node
-    else:
-        return tree
-
+    # # Continue exploring left or right if both nodes are in left (<) or right (>) substree
+    # if s.data < tree.data and b.data < tree.data:
+    #     return find_lca(tree.left, s, b)
+    # elif s.data > tree.data and b.data > tree.data:
+    #     return find_lca(tree.right, s, b)
+    # # If nodes not both in left/right, they split, so return current node
+    # else:
+    #     return tree
+# Iterative
+    while (s.data < tree.data and b.data < tree.data) or (s.data > tree.data and b.data > tree.data):
+        if s.data < tree.data and b.data < tree.data:
+            tree = tree.left
+        elif s.data > tree.data and b.data > tree.data:
+            tree = tree.right
+    return tree
 
 @enable_executor_hook
 def lca_wrapper(executor, tree, s, b):
