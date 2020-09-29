@@ -1038,7 +1038,7 @@ problem_mapping = {
                 "total": 948
             },
             "Python: lowest_common_ancestor.py": {
-                "passed": 0,
+                "passed": 948,
                 "total": 948
             }
         },
@@ -1846,7 +1846,7 @@ problem_mapping = {
                 "total": 951
             },
             "Python: lowest_common_ancestor_in_bst.py": {
-                "passed": 0,
+                "passed": 951,
                 "total": 951
             }
         },
