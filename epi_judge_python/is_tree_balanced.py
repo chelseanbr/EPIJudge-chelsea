@@ -1,6 +1,22 @@
 from binary_tree_node import BinaryTreeNode
 from test_framework import generic_test
 
+'''
+            3
+           / \
+          9.  20
+              /\
+            15  7
+
+                   1
+                  / \
+     T,3       2     2 - T, 1
+              /  \ 
+    T,2  -   3    3 - T, 1
+           /. \
+          4.   4 - T, 1
+'''
+
 import collections
 def is_balanced_binary_tree(tree: BinaryTreeNode) -> bool:
     StatusHeight = collections.namedtuple('StatusHeight', ('balanced', 'height'))
