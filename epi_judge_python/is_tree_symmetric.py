@@ -1,7 +1,7 @@
 from binary_tree_node import BinaryTreeNode
 from test_framework import generic_test
 
-
+import collections
 def is_symmetric(root: BinaryTreeNode) -> bool:
     # # Recursively
     # def check_symmetry(left_subtree, right_subtree):
@@ -9,7 +9,7 @@ def is_symmetric(root: BinaryTreeNode) -> bool:
     #     if not left_subtree and not right_subtree:
     #         return True
     #     elif left_subtree and right_subtree:
-    #         return (left_subtree.val == right_subtree.val and check_symmetry(left_subtree.left, right_subtree.right) \
+    #         return (left_subtree.data == right_subtree.data and check_symmetry(left_subtree.left, right_subtree.right) \
     #     and check_symmetry(left_subtree.right, right_subtree.left))
     #     else:
     #         return False
@@ -27,7 +27,7 @@ def is_symmetric(root: BinaryTreeNode) -> bool:
             continue
         if not t1 or not t2:
             return False
-        if t1.val != t2.val:
+        if t1.data != t2.data:
             return False
         q.append(t1.left)
         q.append(t2.right)
