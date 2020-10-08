@@ -10,23 +10,39 @@ from test_framework.test_utils import enable_executor_hook
 
 def lca(node0: BinaryTreeNode,
         node1: BinaryTreeNode) -> Optional[BinaryTreeNode]:
-    # O(h) time, O(h) space
-    # Get all ancestors of first node
-    first_ancestors = set()
-    nodes = [node0]
-    while nodes:
-        node = nodes.pop()
-        first_ancestors.add(node)
-        if node.parent:
-            nodes.append(node.parent)
-    # Get each ancestor of second node, immediately return if common
-    nodes = [node1]
-    while nodes:
-        node = nodes.pop()
-        if node in first_ancestors:
-            return node
-        if node.parent:
-            nodes.append(node.parent)
+    '''
+    O: lca node
+    I: two nodes
+    C: O(n) time, O(n) space or O(n) space
+    E: 
+     3
+    / \
+   4   5
+  / \   \
+ 7   8   6
+    / \
+   2   9
+    '''
+    # O(n) time, O(n) space
+    # # Get all ancestors of first node
+    # first_ancestors = set()
+    # nodes = [node0]
+    # while nodes:
+    #     node = nodes.pop()
+    #     first_ancestors.add(node)
+    #     if node.parent:
+    #         nodes.append(node.parent)
+    # # Get each ancestor of second node, immediately return if common
+    # nodes = [node1]
+    # while nodes:
+    #     node = nodes.pop()
+    #     if node in first_ancestors:
+    #         return node
+    #     if node.parent:
+    #         nodes.append(node.parent)
+
+    # O(h) time, O(1) space
+    
 
 @enable_executor_hook
 def lca_wrapper(executor, tree, node0, node1):
