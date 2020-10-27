@@ -16,7 +16,27 @@ class BinaryTreeNode:
 
 def find_kth_node_binary_tree(tree: BinaryTreeNode,
                               k: int) -> Optional[BinaryTreeNode]:
-    # TODO - you fill in here.
+    '''
+    * Need to do better than DFS/inorder traversal, O(n) time
+    * Each node stores # nodes in subtree
+     2(4)
+    /  \
+   1(1) 4(2)
+      /
+     3(1)
+    k = 3
+    Basic idea is if k is less than number of nodes in the left subtree then k is in the left subtree if not then k 
+    is in the right subtree. Also if the left node has L nodes then k is the K-L th node in the right subtree
+    '''
+    while tree:
+        left_size = tree.left.size if tree.left else 0
+        if left_size + 1 < k:
+            k -= left_size + 1
+            tree = tree.right
+        elif left_size == k - 1:
+            return tree
+        else:
+            tree = tree.left
     return None
 
 
